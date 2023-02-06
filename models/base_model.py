@@ -9,11 +9,25 @@ class BaseModel:
         all other classes
     """
 
-    def __init__(self):
+    def __init__(self, *args, **kwargs):
         """Constructor for baseModel"""
-        self.id = str(uuid.uuid4())
-        self.created_at = datetime.today()
-        self.updated_at = datetime.today()
+
+        if len(kwargs) == 0:
+            self.id = str(uuid.uuid4())
+            self.created_at = datetime.today()
+            self.updated_at = datetime.today()
+        else:
+            for key, value in kwargs.items():
+                # Don't copy __class__ attribute
+                if key == "__class__":
+                    continue
+
+                # Set created_at and updated_at to instances of datetime
+                if key in ["created_at", "updated_at"]:
+                    self.__setattr__(key, datetime.fromisoformat(value))
+                    continue
+
+                self.__setattr__(key, value)
 
     def __str__(self):
         """String representation of object instance"""
