@@ -3,6 +3,7 @@
 import cmd
 import os
 from models import storage, classes
+import re
 
 
 class HBNBCommand(cmd.Cmd):
@@ -98,13 +99,33 @@ class HBNBCommand(cmd.Cmd):
             if obj.__class__.__name__ == t_class.__name__:
                 print(obj)
 
+    def do_update(self, line):
+        """Updates an instance based on the class name
+        and id by adding or updating attribute
+        """
+        obj = find_object(line)
+
+        if obj is None:
+            return
+
+        args = parse_args(line)
+
+        if len(args) >= 4:
+            # Update object attribute
+            obj.__setattr__(args[2], args[3])
+            obj.save()
+        elif len(args) == 2:
+            print("** attribute name missing **")
+        elif len(args) == 3:
+            print("** value missing **")
+
 
 def parse_args(line):
     """Parses the command line argument and
     returns a tuple of all the arguments
     """
-    args = tuple(line.split())
-    return args
+    args = re.findall(r'[^"\s]+|"[^"]+"', line)
+    return tuple([arg.replace('"', "") for arg in args])
 
 
 def get_class(class_name):
@@ -112,10 +133,7 @@ def get_class(class_name):
      the class_name or None if it doesn't exist
     """
 
-    if class_name in classes:
-        return classes[class_name]
-    else:
-        return None
+    return classes.get(class_name, None)
 
 
 def get_object(cls, id):
@@ -133,9 +151,8 @@ def get_object(cls, id):
 
 
 def find_object(line):
-    """Handles functions associated with retrieving
-    an object given className and id. Returns the object if
-    it exist or None
+    """Retrieves an object based on className and id and handles
+    error printing. Returns the matching object or None
     """
 
     args = parse_args(line)
