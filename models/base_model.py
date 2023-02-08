@@ -13,9 +13,12 @@ class BaseModel:
         """Constructor for baseModel"""
 
         if len(kwargs) == 0:
+            from models import storage
+
             self.id = str(uuid.uuid4())
             self.created_at = datetime.today()
             self.updated_at = datetime.today()
+            storage.new(self)
         else:
             for key, value in kwargs.items():
                 # Don't copy __class__ attribute
@@ -31,13 +34,16 @@ class BaseModel:
 
     def __str__(self):
         """String representation of object instance"""
-        return f"[{self.__class__}] ({self.id}) {self.__dict__}"
+        return f"[{self.__class__.__name__}] ({self.id}) {self.__dict__}"
 
     def save(self):
         """Save function
         Updates the update_at instance attribute
         """
+        from models import storage
+
         self.updated_at = datetime.today()
+        storage.save()
 
     def to_dict(self):
         """to_dict function
