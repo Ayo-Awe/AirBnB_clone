@@ -45,6 +45,7 @@ class FileStorage:
         Deserializes the JSON file to __objects
         """
         from models.base_model import BaseModel
+        from models import classes
 
         try:
             # Read objects from file if file exists
@@ -54,7 +55,8 @@ class FileStorage:
 
             # Serialize dictionaries back to object instances
             for key, value in objects.items():
-                FileStorage.__objects[key] = BaseModel(**value)
+                FileStorage.__objects[key] = classes[value["__class__"]](
+                    **value)
 
         except Exception:
             pass
