@@ -14,7 +14,7 @@ class HBNBCommand(cmd.Cmd):
         run in non-interactive mode
         """
         if not os.isatty(self.stdin.fileno()):
-            self.prompt += "\n"
+            self.prompt = ""
 
     def do_EOF(self, line):
         """EOF command to exit program
@@ -133,7 +133,7 @@ def get_class(class_name):
      the class_name or None if it doesn't exist
     """
 
-    return classes.get(class_name, None)
+    return classes.get(class_name)
 
 
 def get_object(cls, id):
@@ -143,11 +143,7 @@ def get_object(cls, id):
 
     key = f"{cls.__name__}.{id}"
     objects = storage.all()
-
-    if key in objects:
-        return objects[key]
-    else:
-        return None
+    return objects.get(key)
 
 
 def find_object(line):
