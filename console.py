@@ -119,6 +119,26 @@ class HBNBCommand(cmd.Cmd):
         elif len(args) == 3:
             print("** value missing **")
 
+    def complete_all(self, text, *args):
+        """Completion for all command"""
+        return autocomplete_class(text)
+
+    def complete_show(self, text, line, *args):
+        """Completion for show command"""
+        return autocomplete_class_and_id(text, line)
+
+    def complete_create(self, text, *args):
+        """Completion for create command"""
+        return autocomplete_class(text)
+
+    def complete_destroy(self, text, line, *args):
+        """Completion for destroy command"""
+        return autocomplete_class_and_id(text, line)
+
+    def complete_update(self, text, line, *args):
+        """Completion for update command"""
+        return autocomplete_class_and_id(text, line)
+
 
 def parse_args(line):
     """Parses the command line argument and
@@ -132,7 +152,6 @@ def get_class(class_name):
     """Returns the class associated with
      the class_name or None if it doesn't exist
     """
-
     return classes.get(class_name)
 
 
@@ -140,7 +159,6 @@ def get_object(cls, id):
     """Retrieves an object from file storage based on
     its class and id
     """
-
     key = f"{cls.__name__}.{id}"
     objects = storage.all()
     return objects.get(key)
@@ -150,7 +168,6 @@ def find_object(line):
     """Retrieves an object based on className and id and handles
     error printing. Returns the matching object or None
     """
-
     args = parse_args(line)
 
     if len(args) == 0:
@@ -174,6 +191,41 @@ def find_object(line):
         return None
 
     return obj
+
+
+def autocomplete_class_and_id(text, line):
+    """Autocompletion for commands with
+    class and id positional arguments
+    """
+    args = parse_args(line)
+
+    if not text:
+        if len(args) == 1:
+            return list(classes.keys())
+        elif len(args) == 2:
+            # Return ids of all objects based on class
+            return [obj.id for obj in storage.all().values()
+                    if type(obj).__name__ == args[1]]
+    else:
+        # Handle positional parameters
+        if len(args) == 2:
+            return [class_name for class_name in classes.keys()
+                    if class_name.startswith(text)]
+        elif len(args) == 3:
+            return [obj.id for obj in storage.all().values()
+                    if type(obj).__name__ == args[1]
+                    and obj.id.startswith(text)]
+
+
+def autocomplete_class(text):
+    """AutoCompletion for commands with
+    class positional argument
+    """
+    if not text:
+        return list(classes.keys())
+    else:
+        return [c_name for c_name in classes.keys()
+                if c_name.startswith(text)]
 
 
 if __name__ == "__main__":

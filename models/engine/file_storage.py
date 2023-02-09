@@ -37,7 +37,7 @@ class FileStorage:
 
         # Write objects to file
         with open(FileStorage.__file_path, "w", encoding="utf-8") as f:
-            json.dump(objects, f)
+            json.dump(objects, f, indent=2)
             f.close()
 
     def reload(self):
