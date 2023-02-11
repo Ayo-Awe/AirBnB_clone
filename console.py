@@ -11,12 +11,12 @@ class HBNBCommand(cmd.Cmd):
     """
     prompt = "(hbnb) "
 
-    def preloop(self) -> None:
-        """Add newline character to prompt if interpreter is
-        run in non-interactive mode
-        """
-        if not os.isatty(self.stdin.fileno()):
-            self.prompt = ""
+    # def preloop(self) -> None:
+    #     """Add newline character to prompt if interpreter is
+    #     run in non-interactive mode
+    #     """
+    #     if not os.isatty(self.stdin.fileno()):
+    #         self.prompt = ""
 
     def do_EOF(self, line):
         """EOF command to exit program
