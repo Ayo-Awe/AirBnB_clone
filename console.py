@@ -7,6 +7,8 @@ import re
 
 
 class HBNBCommand(cmd.Cmd):
+    """Command Interpreter class
+    """
     prompt = "(hbnb) "
 
     def preloop(self) -> None:
