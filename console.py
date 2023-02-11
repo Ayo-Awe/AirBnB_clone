@@ -119,6 +119,27 @@ class HBNBCommand(cmd.Cmd):
         elif len(args) == 3:
             print("** value missing **")
 
+    def do_count(self, line):
+        """Count command counts the number of instances
+        of a class
+        """
+        # No argument
+        if line == "":
+            # Return total number of objects
+            print(len(storage.all().values()))
+            return
+
+        t_class = get_class(line)
+        if t_class is None:
+            print("** class doesn't exist **")
+            return
+
+        # Count number of matching instancess
+        matching_objs = [obj for obj in storage.all().values() if type(
+            obj).__name__ == t_class.__name__]
+
+        print(len(matching_objs))
+
     def complete_all(self, text, *args):
         """Completion for all command"""
         return autocomplete_class(text)
@@ -128,6 +149,10 @@ class HBNBCommand(cmd.Cmd):
         return autocomplete_class_and_id(text, line)
 
     def complete_create(self, text, *args):
+        """Completion for create command"""
+        return autocomplete_class(text)
+
+    def complete_count(self, text, *args):
         """Completion for create command"""
         return autocomplete_class(text)
 
