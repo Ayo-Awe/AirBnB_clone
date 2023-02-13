@@ -44,7 +44,6 @@ class FileStorage:
         """reload function
         Deserializes the JSON file to __objects
         """
-        from models.base_model import BaseModel
         from models import classes
 
         try:
