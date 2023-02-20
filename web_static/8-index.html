@@ -1,0 +1,143 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <title>AirBnB</title>
+    <link rel="stylesheet" href="styles/4-common.css" />
+    <link rel="stylesheet" href="styles/6-filters.css" />
+    <link rel="stylesheet" href="styles/8-places.css" />
+    <link rel="stylesheet" href="styles/3-header.css" />
+    <link rel="stylesheet" href="styles/3-footer.css" />
+    <link rel="shortcut icon" href="images/icon.png" />
+  </head>
+  <body>
+    <header></header>
+    <div class="container">
+      <section class="filters">
+        <div class="locations">
+          <h3>States</h3>
+          <h4>California, Arizona...</h4>
+          <ul class="popover">
+            <li>
+              <h2>Arizona</h2>
+              <ul>
+                <li>Page 1</li>
+                <li>Page 2</li>
+              </ul>
+            </li>
+            <li>
+              <h2>California</h2>
+              <ul>
+                <li>San Francisco</li>
+                <li>San Jose</li>
+              </ul>
+            </li>
+          </ul>
+        </div>
+        <div class="amenities">
+          <h3>Amenities</h3>
+          <h4>Toilets, Bedrooms...</h4>
+          <ul class="popover">
+            <li>TV</li>
+            <li>Fridge</li>
+            <li>Toiler</li>
+          </ul>
+        </div>
+        <button>Search</button>
+      </section>
+      <section class="places">
+        <h1>Places</h1>
+        <article>
+          <h2>My Home</h2>
+          <div class="price_by_night">$80</div>
+          <div class="information">
+            <div class="max_guest">2 Guests</div>
+            <div class="number_rooms">1 Bedroom</div>
+            <div class="number_bathrooms">2 Bathrooms</div>
+          </div>
+          <div class="user"><strong>Owner</strong> John Oseni</div>
+          <div class="description">
+            Lorem ipsum dolor sit, amet consectetur adipisicing elit.
+            Perferendis deserunt nostrum repellat. Temporibus, obcaecati! Iure
+            ea reprehenderit ex minima maxime molestias alias soluta quas
+            laudantium et, impedit vitae minus. Perferendis.
+          </div>
+        </article>
+        <article>
+          <h2>A suite</h2>
+          <div class="price_by_night">$80</div>
+          <div class="information">
+            <div class="max_guest">2 Guests</div>
+            <div class="number_rooms">1 Bedroom</div>
+            <div class="number_bathrooms">2 Bathrooms</div>
+          </div>
+          <div class="user"><strong>Owner</strong> John Oseni</div>
+          <div class="description">
+            Lorem ipsum dolor sit, amet consectetur adipisicing elit.
+            Perferendis deserunt nostrum repellat. Temporibus, obcaecati! Iure
+            ea reprehenderit ex minima maxime molestias alias soluta quas
+            laudantium et, impedit vitae minus. Perferendis.
+          </div>
+        </article>
+        <article>
+          <h2>Tiny House</h2>
+          <div class="price_by_night">$80</div>
+          <div class="information">
+            <div class="max_guest">2 Guests</div>
+            <div class="number_rooms">1 Bedroom</div>
+            <div class="number_bathrooms">2 Bathrooms</div>
+          </div>
+          <div class="user"><strong>Owner</strong> John Oseni</div>
+          <div class="description">
+            Lorem ipsum dolor sit, amet consectetur adipisicing elit.
+            Perferendis deserunt nostrum repellat. Temporibus, obcaecati! Iure
+            ea reprehenderit ex minima maxime molestias alias soluta quas
+            laudantium et, impedit vitae minus. Perferendis.
+          </div>
+        </article>
+      </section>
+    </div>
+    <footer>Best School</footer>
+  </body>
+</html>
+<!-- Price by night:
+tag: div
+classname: price_by_night
+same level as the place name
+font color: #FF5A5F
+border: #FF5A5F 4px rounded
+min width: 60px
+height: 60px
+font size: 30px
+align: the top right (with space)
+Information section:
+tag: div
+classname: information
+height: 80px
+border: top and bottom #DDDDDD 1px
+contains (align vertically):
+Number of guests:
+tag: div
+classname: max_guest
+width: 100px
+fake text
+icon
+Number of bedrooms:
+tag: div
+classname: number_rooms
+width: 100px
+fake text
+icon
+Number of bathrooms:
+tag: div
+classname: number_bathrooms
+width: 100px
+fake text
+icon
+User section:
+tag: div
+classname: user
+text Owner: <fake text>
+Owner text should be in bold
+Description section:
+tag: div
+classname: description -->
